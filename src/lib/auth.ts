@@ -36,9 +36,8 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: [
-    'aiworkouttracker://',
-    'aiworkouttracker//*',
-
+    'myworkoutmobileapp://',
+    'myworkoutmobileapp//*',
     'exp://',
     'exp://*',
     'exp://**',
@@ -46,14 +45,6 @@ export const auth = betterAuth({
     'http://localhost:*',
     'http://192.168.*.*:*',
     AUTH_URL,
-
-    // ...(process.env.NODE_ENV === "development"
-    //   ? [
-    //       "exp://", // Trust all Expo URLs (prefix matching)
-    //       "exp://**", // Trust all Expo URLs (wildcard matching)
-    //       "exp://192.168.*.*:*/**", // Trust 192.168.x.x IP range with any port and path
-    //     ]
-    //   : []),
   ].filter(Boolean),
   hooks: {
     before: createAuthMiddleware(async (ctx) => {

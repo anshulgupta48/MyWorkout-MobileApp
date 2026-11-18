@@ -8,7 +8,7 @@ export const authClient = createAuthClient({
   baseURL: API_URL,
   plugins: [
     expoClient({
-      scheme: 'aiworkouttracker',
+      scheme: 'myworkoutmobileapp',
       storagePrefix: 'myworkout',
       storage: SecureStore,
     }) as BetterAuthClientPlugin,
