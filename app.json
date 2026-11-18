@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "myworkout-mobile-app",
+    "name": "MyWorkout MobileApp",
     "slug": "myworkout-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,10 +30,13 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-logo-white.png",
+          "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-secure-store",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
