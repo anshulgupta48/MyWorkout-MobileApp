@@ -1,4 +1,4 @@
-import { differenceInCalendarDays, startOfDay, subDays } from "date-fns";
+import { differenceInCalendarDays, startOfDay, subDays } from 'date-fns';
 
 export type StreakSummary = {
   bestStreak: number;

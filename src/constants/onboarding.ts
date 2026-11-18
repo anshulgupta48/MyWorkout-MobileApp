@@ -1,19 +1,19 @@
 import {
-    OnboardingValues,
-    onboardingValuesSchema,
-} from "@/lib/validations/onboarding-validation";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
+  OnboardingValues,
+  onboardingValuesSchema,
+} from '@/lib/validations/onboarding-validation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
-const ONBOARDING_KEYS = "myworkout_onboarding_answers";
+const ONBOARDING_KEYS = 'myworkout_onboarding_answers';
 export const answers: Partial<OnboardingValues> = {};
 
 export const steps = [
-  { field: "gender", key: "gender" },
-  { field: "goal", key: "goal" },
-  { field: "experience", key: "experience" },
+  { field: 'gender', key: 'gender' },
+  { field: 'goal', key: 'goal' },
+  { field: 'experience', key: 'experience' },
 ] as const;
-const isClient = Platform.OS !== "web" || typeof window !== "undefined";
+const isClient = Platform.OS !== 'web' || typeof window !== 'undefined';
 
 if (isClient) {
   AsyncStorage.getItem(ONBOARDING_KEYS)

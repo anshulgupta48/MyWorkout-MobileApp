@@ -8,17 +8,17 @@ import {
   startOfDay,
   startOfWeek,
   subWeeks,
-} from "date-fns";
-import { useRef, useState } from "react";
+} from 'date-fns';
+import { useRef, useState } from 'react';
 import {
   Pressable,
   ScrollView,
   Text,
   useWindowDimensions,
   View,
-} from "react-native";
+} from 'react-native';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 type WeekCalendarProps = {
   markedDates?: Date[];
@@ -55,7 +55,7 @@ export default function WeekCalendar({
 
   return (
     <ScrollView
-      className="-mx-5 mt-5 flex-grow-0"
+      className='-mx-5 mt-5 flex-grow-0'
       horizontal
       onContentSizeChange={() =>
         scrollRef.current?.scrollToEnd({ animated: false })
@@ -66,7 +66,7 @@ export default function WeekCalendar({
     >
       {weeks.map((week) => (
         <View
-          className="flex-row gap-1.5 px-5"
+          className='flex-row gap-1.5 px-5'
           key={week[0].getTime()}
           style={{ width }}
         >
@@ -83,39 +83,39 @@ export default function WeekCalendar({
 
             return (
               <Pressable
-                accessibilityLabel={date.toLocaleDateString("en-US", {
-                  dateStyle: "full",
+                accessibilityLabel={date.toLocaleDateString('en-US', {
+                  dateStyle: 'full',
                 })}
-                accessibilityRole="button"
+                accessibilityRole='button'
                 accessibilityState={{
                   disabled: isFuture,
                   selected: isSelected,
                 }}
                 className={cn(
-                  "h-[88px] flex-1 items-center justify-center rounded-2xl border shadow-xs",
+                  'h-[88px] flex-1 items-center justify-center rounded-2xl border shadow-xs',
                   isSelected
-                    ? "border-primary bg-card"
-                    : "border-border bg-background/80",
-                  isFuture && "opacity-40",
+                    ? 'border-primary bg-card'
+                    : 'border-border bg-background/80',
+                  isFuture && 'opacity-40',
                 )}
                 disabled={isFuture}
                 key={date.getTime()}
                 onPress={() => selectDate(date)}
               >
-                <Text className="font-inter-medium text-[10px] text-muted-foreground">
-                  {format(date, "EE").toUpperCase()}
+                <Text className='font-inter-medium text-[10px] text-muted-foreground'>
+                  {format(date, 'EE').toUpperCase()}
                 </Text>
-                <Text className="mt-2 font-inter-bold text-[16px] text-foreground">
-                  {format(date, "dd")}
+                <Text className='mt-2 font-inter-bold text-[16px] text-foreground'>
+                  {format(date, 'dd')}
                 </Text>
                 <View
                   className={cn(
-                    "mt-2 h-1.5 w-1.5 rounded-full",
+                    'mt-2 h-1.5 w-1.5 rounded-full',
                     hasWorkout
-                      ? "bg-primary"
+                      ? 'bg-primary'
                       : isToday
-                        ? "bg-border"
-                        : "bg-transparent",
+                        ? 'bg-border'
+                        : 'bg-transparent',
                   )}
                 />
               </Pressable>

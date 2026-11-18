@@ -1,29 +1,29 @@
-import { db, profiles } from "@/db";
-import * as schema from "@/db/schema";
-import { expo } from "@better-auth/expo";
-import { APIError, betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { createAuthMiddleware } from "better-auth/api";
-import { onboardingValuesSchema } from "./validations/onboarding-validation";
+import { db, profiles } from '@/db';
+import * as schema from '@/db/schema';
+import { expo } from '@better-auth/expo';
+import { APIError, betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { createAuthMiddleware } from 'better-auth/api';
+import { onboardingValuesSchema } from './validations/onboarding-validation';
 
 const AUTH_URL = process.env.BETTER_AUTH_URL!;
 
 const getOnboarding = (body: unknown) => {
   const result = onboardingValuesSchema.safeParse(body);
   if (!result.success) {
-    throw new APIError("BAD_REQUEST", {
-      message: "Invalid onboarding details",
+    throw new APIError('BAD_REQUEST', {
+      message: 'Invalid onboarding details',
     });
   }
   return result.data;
 };
 
 export const auth = betterAuth({
-  appName: "MyWorkout",
+  appName: 'MyWorkout',
   baseURL: AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET!,
   database: drizzleAdapter(db, {
-    provider: "pg",
+    provider: 'pg',
     schema: schema,
   }),
   emailAndPassword: {
@@ -36,15 +36,15 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: [
-    "aiworkouttracker://",
-    "aiworkouttracker//*",
+    'aiworkouttracker://',
+    'aiworkouttracker//*',
 
-    "exp://",
-    "exp://*",
-    "exp://**",
-    "exp://192.168.*.*:*/**",
-    "http://localhost:*",
-    "http://192.168.*.*:*",
+    'exp://',
+    'exp://*',
+    'exp://**',
+    'exp://192.168.*.*:*/**',
+    'http://localhost:*',
+    'http://192.168.*.*:*',
     AUTH_URL,
 
     // ...(process.env.NODE_ENV === "development"
@@ -57,10 +57,10 @@ export const auth = betterAuth({
   ].filter(Boolean),
   hooks: {
     before: createAuthMiddleware(async (ctx) => {
-      if (ctx.path === "/sign-up/email") getOnboarding(ctx.body);
+      if (ctx.path === '/sign-up/email') getOnboarding(ctx.body);
     }),
     after: createAuthMiddleware(async (ctx) => {
-      if (ctx.path != "/sign-up/email" || !ctx.context.newSession) return;
+      if (ctx.path !== '/sign-up/email' || !ctx.context.newSession) return;
       await db.insert(profiles).values({
         userId: ctx.context.newSession.user.id,
         ...getOnboarding(ctx.body),

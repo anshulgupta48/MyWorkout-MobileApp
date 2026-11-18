@@ -1,23 +1,22 @@
-import type { ComponentRef, ReactNode } from "react";
-import { forwardRef } from "react";
-import type { PressableProps } from "react-native";
-import { ActivityIndicator, Pressable, Text } from "react-native";
-
-import { cn } from "@/lib/utils";
-import { useAppThemeColor } from "@/theme/app-theme";
+import { cn } from '@/lib/utils';
+import { useAppThemeColor } from '@/theme/app-theme';
+import type { ComponentRef, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { PressableProps } from 'react-native';
+import { ActivityIndicator, Pressable, Text } from 'react-native';
 
 const variants = {
   default: {
-    button: "border-primary bg-primary active:bg-primary-hover",
-    text: "text-primary-foreground",
+    button: 'border-primary bg-primary active:bg-primary-hover',
+    text: 'text-primary-foreground',
   },
   outline: {
-    button: "border-border bg-card active:bg-muted",
-    text: "text-foreground",
+    button: 'border-border bg-card active:bg-muted',
+    text: 'text-foreground',
   },
   secondary: {
-    button: "border-secondary bg-secondary active:bg-muted",
-    text: "text-secondary-foreground",
+    button: 'border-secondary bg-secondary active:bg-muted',
+    text: 'text-secondary-foreground',
   },
 } as const;
 
@@ -25,7 +24,7 @@ type ButtonProps = PressableProps & {
   children: ReactNode;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  size?: "default" | "sm";
+  size?: 'default' | 'sm';
   isLoading?: boolean;
   variant?: keyof typeof variants;
 };
@@ -39,22 +38,22 @@ const Button = forwardRef<ComponentRef<typeof Pressable>, ButtonProps>(
       leftIcon,
       rightIcon,
       isLoading,
-      size = "default",
-      variant = "default",
+      size = 'default',
+      variant = 'default',
       ...props
     },
     ref,
   ) => {
-    const primaryForeground = useAppThemeColor("primaryForeground");
+    const primaryForeground = useAppThemeColor('primaryForeground');
     return (
       <Pressable
         ref={ref}
-        accessibilityRole="button"
+        accessibilityRole='button'
         className={cn(
-          "flex-row items-center justify-center gap-2 rounded-xl border px-5",
-          size === "sm" ? "h-11" : "h-14",
+          'flex-row items-center justify-center gap-2 rounded-xl border px-5',
+          size === 'sm' ? 'h-11' : 'h-14',
           variants[variant].button,
-          disabled && "opacity-50",
+          disabled && 'opacity-50',
           className,
         )}
         disabled={Boolean(disabled)}
@@ -67,8 +66,8 @@ const Button = forwardRef<ComponentRef<typeof Pressable>, ButtonProps>(
         )}
         <Text
           className={cn(
-            "text-center font-inter-semibold",
-            size === "sm" ? "text-[13px]" : "text-[14px]",
+            'text-center font-inter-semibold',
+            size === 'sm' ? 'text-[13px]' : 'text-[14px]',
             variants[variant].text,
           )}
         >
@@ -80,6 +79,6 @@ const Button = forwardRef<ComponentRef<typeof Pressable>, ButtonProps>(
   },
 );
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 export default Button;

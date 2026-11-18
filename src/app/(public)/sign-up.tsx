@@ -35,7 +35,6 @@ const SignUp = () => {
   const router = useRouter();
   const foreground = useAppThemeColor('foreground');
   const iconColor = useAppThemeColor('mutedForeground');
-  const primaryForeground = useAppThemeColor('primaryForeground');
   const [isPending, setIsPending] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -59,7 +58,7 @@ const SignUp = () => {
   const onSubmit = handleSubmit(async ({ email, fullName, password }) => {
     const result = getOnboardingAnswers();
     if (!result.success) {
-      router.replace('/welcome');
+      router.replace('/');
       return;
     }
     setIsPending(true);
